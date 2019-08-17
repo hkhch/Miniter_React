@@ -1,12 +1,12 @@
 import React, { Component } from 'react';
-import './SignUp.css';
+import { Link } from 'react-router-dom';
 import SmartInput from '../../Components/smartInput/smartInput.js'
-import { Link } from 'react-router-dom'
+import './SignUp.css';
 
 
 class SignUp extends Component {
-  constructor(props) {
-    // 부호객체 생성자 호출
+constructor(props) {
+// 부호객체 생성자 호출
     super(props);
 
     // 맴버변수 정의
@@ -33,9 +33,10 @@ class SignUp extends Component {
   }
 
   // 자식 객체에서 이벤트가 발생되었을때 호출되는 Callback함수
-  onChangeDataForParents = (id, dataFromChild) => {
+  onChangeDataForParents = (/*id, dataFromChild*/e) => {
     // 자식 컴포넌트에서 받은 값을 이용한 로직 처리
     // ID관련 데이터
+    /*
     switch(id){
     case "0": 
         this.setState({ID: dataFromChild});
@@ -55,6 +56,13 @@ class SignUp extends Component {
     default:
         break;
     }
+    */
+
+    // Dynamic Property Key
+    this.setState({
+        [e.target.name]: e.target.value,
+    });
+
   }
 
   // 랜더링 함수 
@@ -71,19 +79,21 @@ class SignUp extends Component {
 
             <div id="SIGNUP_INPUT_CONTAINER">
                 {/* 사용자 정의 컴포넌트 생성부분 */}
-                <SmartInput className="SMART_INPUT" id="0" inputType="text" 
+                <SmartInput className="SMART_INPUT" name="ID" id="0" inputType="text" 
                             placeholder="Enter ID" onChangeDataForParents={this.onChangeDataForParents}></SmartInput>
-                <SmartInput className="SMART_INPUT" id="1" inputType="text" 
+                <SmartInput className="SMART_INPUT" name="Name" id="1" inputType="text" 
                             placeholder="Enter Name" onChangeDataForParents={this.onChangeDataForParents}></SmartInput>
-                <SmartInput className="SMART_INPUT" id="2" inputType="password" 
+                <SmartInput className="SMART_INPUT" name="Password" id="2" inputType="password" 
                             placeholder="Password" onChangeDataForParents={this.onChangeDataForParents}></SmartInput>
-                <SmartInput className="SMART_INPUT" id="3" inputType="password" 
+                <SmartInput className="SMART_INPUT" name="RePassword" id="3" inputType="password" 
                             placeholder="Password" onChangeDataForParents={this.onChangeDataForParents}></SmartInput>
-                <SmartInput className="SMART_INPUT" id="4" inputType="text" 
+                <SmartInput className="SMART_INPUT" name="Profile" id="4" inputType="text" 
                             placeholder="Profile" onChangeDataForParents={this.onChangeDataForParents}></SmartInput>
             </div>                        
 
-            <div id="BUTTON_CONTAINER">
+            <div 
+                id="BUTTON_CONTAINER"
+            >
                 <button id="SIGNUP_COMPLETE" onClick={this.onSignUpClick}>SIGN UP</button>
                 <button id="SIGNUP_DELETE">DELETE</button>
                 <Link id="SIGNUP_CANCEL" to="/">CANCEL</Link>

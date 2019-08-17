@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
 import './Tweets.css';
-import { Link } from 'react-router-dom'
 
 
 class Tweets extends Component {
@@ -28,41 +28,6 @@ class Tweets extends Component {
 
     // 생성자 호출 상태 확인
     console.log('constructor');
-  }
-
-  // 자신의 객체에서 발생되는 이벤트 함수
-  onSignUpClick = (e) => {
-    console.log("[ SIGNUP CLICK ]", e.target.value);
-    alert(`SIGN UP 버튼이 눌렸습니다. \n    ID:${this.state.ID}             \
-                                  \n    NAME:${this.state.Name}         \
-                                  \n    PW:${this.state.Password}       \
-                                  \n    RePW:${this.state.RePassword}   \
-                                  \n    Profile:${this.state.Profile}`);
-  }
-
-  // 자식 객체에서 이벤트가 발생되었을때 호출되는 Callback함수
-  onChangeDataForParents = (id, dataFromChild) => {
-    // 자식 컴포넌트에서 받은 값을 이용한 로직 처리
-    // ID관련 데이터
-    switch(id){
-    case "0": 
-        this.setState({ID: dataFromChild});
-        break;
-    case "1":
-        this.setState({Name: dataFromChild});
-        break;
-    case "2":
-        this.setState({Password: dataFromChild});        
-        break;
-    case "3":
-        this.setState({RePassword: dataFromChild});        
-        break;
-    case "4":
-        this.setState({Profile: dataFromChild});
-        break;
-    default:
-        break;
-    }
   }
 
   handleChange = (e)=>{
@@ -152,6 +117,7 @@ class Tweets extends Component {
             <div className="CONTENTS_AREA">
                 {/* JAVASCRIPT로 동적으로 생성되는 ELEMENT */}
                 {
+                    // 연속적인 Element생성시 key값을 부여하여 React가 구별할 수 있도록 함
                     tweets.map((el, idx) => (
                                                 <div key={idx}>
                                                     <p>{el}</p>

@@ -1,0 +1,64 @@
+import React, { Component } from 'react';
+import './App.css';
+
+class Twitter extends Component {
+
+  state = {
+    twitterText: '',
+    tweets: []
+  };
+
+  handleChange = (e) => {
+    this.setState({
+      twitterText: e.target.value
+    })
+  };
+
+  addTweet = () => {
+
+    this.state.tweets.unshift({
+      text: this.state.twitterText,
+      date: new Date()
+    });
+
+    this.setState({
+      tweets: this.state.tweets
+    })
+  };
+
+  render() {
+    let {
+      tweets,
+      twitterText
+    } = this.state;
+
+    return (
+      <div className="App">
+        <textarea
+          value={twitterText}
+          onChange={this.handleChange}
+        />
+
+        <div
+          onClick={this.addTweet}
+        >
+          트윗!!
+        </div>
+
+        <ul>
+          {
+            tweets.map((el, idx) => (
+              <li key={idx}>
+                <span>{el.date.toString()}</span>
+                <p>{el.text}</p>
+              </li>
+            ))
+          }
+        </ul>
+
+      </div>
+    );
+  }
+}
+
+export default Twitter;
